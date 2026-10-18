@@ -1,0 +1,44 @@
+{
+  "name": "codementor-ai",
+  "version": "1.0.0",
+  "private": true,
+  "description": "CodeMentor AI — an AI-powered programming tutor built with Next.js. Chat is React-memory only; nothing is persisted.",
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "eslint src",
+    "typecheck": "tsc --noEmit"
+  },
+  "dependencies": {
+    "@gsap/react": "^2.1.2",
+    "@monaco-editor/react": "^4.7.0",
+    "@tailwindcss/postcss": "^4.3.3",
+    "clsx": "^2.1.1",
+    "gsap": "^3.15.0",
+    "highlight.js": "^11.12.0",
+    "lucide-react": "^1.59.0",
+    "next": "^16.4.2",
+    "react": "^19.3.1",
+    "react-dom": "^19.3.1",
+    "react-markdown": "^10.1.0",
+    "rehype-highlight": "^7.0.2",
+    "remark-gfm": "^4.0.1",
+    "tailwind-merge": "^3.7.0",
+    "tailwindcss": "^4.3.3",
+    "zod": "^4.6.7"
+  },
+  "devDependencies": {
+    "@types/node": "^26.6.5",
+    "@types/react": "^19.3.0",
+    "@types/react-dom": "^19.3.0",
+    "eslint": "^9.39.0",
+    "eslint-config-next": "^16.4.2",
+    "monaco-editor": "^0.57.0",
+    "puppeteer-core": "^24.43.1",
+    "typescript": "^5.9.0"
+  },
+  "engines": {
+    "node": ">=20.11.0"
+  }
+}

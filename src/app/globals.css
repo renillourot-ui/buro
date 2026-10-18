@@ -1,0 +1,265 @@
+@import "tailwindcss";
+
+/* ───────────────────────────── design tokens ───────────────────────────── */
+@theme {
+  --color-bg: #07080b;
+  --color-surface: #0c0e13;
+  --color-raised: #11141b;
+  --color-hover: #161a23;
+  --color-border: #1d2129;
+  --color-border-strong: #2b313d;
+  --color-ink: #e9ecf2;
+  --color-muted: #9aa2b4;
+  --color-faint: #697183;
+  --color-accent: #6e7bff;
+  --color-accent-hover: #8692ff;
+  --color-accent-soft: rgba(110, 123, 255, 0.12);
+  --color-accent-border: rgba(110, 123, 255, 0.35);
+  --color-violet: #a78bfa;
+  --color-code-bg: #0a0c10;
+  --color-success: #4ade80;
+  --color-warning: #fbbf24;
+  --color-danger: #f87171;
+  --color-info: #7dd3fc;
+
+  --font-sans: var(--font-inter), ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
+  --font-mono: var(--font-jetbrains), ui-monospace, "SFMono-Regular", Menlo, Consolas, monospace;
+
+  --shadow-panel: 0 1px 0 0 rgb(255 255 255 / 0.03), 0 8px 24px -12px rgb(0 0 0 / 0.5);
+  --shadow-pop: 0 16px 48px -16px rgb(0 0 0 / 0.65);
+
+  --animate-fade-in: fade-in 0.3s ease-out both;
+  --animate-blink: blink 1s steps(2, start) infinite;
+}
+
+@keyframes fade-in {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+@keyframes blink {
+  50% { opacity: 0; }
+}
+@keyframes shimmer {
+  from { background-position: 200% 0; }
+  to { background-position: -200% 0; }
+}
+@keyframes typing-dot {
+  0%, 60%, 100% { transform: translateY(0); opacity: 0.35; }
+  30% { transform: translateY(-3px); opacity: 1; }
+}
+
+/* ─────────────────────────────── base ──────────────────────────────────── */
+@layer base {
+  html {
+    color-scheme: dark;
+    scroll-behavior: smooth;
+    /* scroll-padding keeps anchored sections clear of the sticky navbar */
+    scroll-padding-top: 5.5rem;
+  }
+
+  body {
+    @apply bg-bg text-ink font-sans antialiased;
+    text-rendering: optimizeLegibility;
+  }
+
+  ::selection {
+    background: rgba(110, 123, 255, 0.35);
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--color-accent);
+    outline-offset: 2px;
+    border-radius: 4px;
+  }
+
+  * {
+    scrollbar-width: thin;
+    scrollbar-color: #2b313d transparent;
+  }
+  ::-webkit-scrollbar {
+    width: 10px;
+    height: 10px;
+  }
+  ::-webkit-scrollbar-thumb {
+    background: #262c38;
+    border-radius: 8px;
+    border: 2px solid transparent;
+    background-clip: content-box;
+  }
+  ::-webkit-scrollbar-track {
+    background: transparent;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    html {
+      scroll-behavior: auto;
+    }
+    *,
+    ::before,
+    ::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+    }
+  }
+}
+
+/* ───────────────────────────── components ──────────────────────────────── */
+@layer components {
+  .panel {
+    @apply rounded-xl border border-border bg-surface;
+  }
+
+  .skeleton {
+    background: linear-gradient(90deg, #141821 25%, #1c212c 37%, #141821 63%);
+    background-size: 200% 100%;
+    animation: shimmer 1.4s ease-in-out infinite;
+  }
+
+  .typing-dot {
+    @apply h-1.5 w-1.5 rounded-full bg-accent;
+    animation: typing-dot 1.2s ease-in-out infinite;
+  }
+
+  /* highlight.js theme for chat answers, lesson snippets and reviews */
+  .hljs {
+    color: #d6dbe6;
+  }
+  .hljs-comment,
+  .hljs-quote {
+    color: #5f6675;
+    font-style: italic;
+  }
+  .hljs-keyword,
+  .hljs-selector-tag,
+  .hljs-literal,
+  .hljs-section,
+  .hljs-doctag,
+  .hljs-meta,
+  .hljs-tag {
+    color: #b4a0ff;
+  }
+  .hljs-string,
+  .hljs-regexp,
+  .hljs-addition,
+  .hljs-template-string,
+  .hljs-selector-attr {
+    color: #8fd49a;
+  }
+  .hljs-number,
+  .hljs-symbol,
+  .hljs-bullet,
+  .hljs-selector-id,
+  .hljs-deletion,
+  .hljs-name {
+    color: #ff9d9d;
+  }
+  .hljs-number,
+  .hljs-symbol,
+  .hljs-bullet {
+    color: #f2b46b;
+  }
+  .hljs-title,
+  .hljs-title.function_,
+  .hljs-built_in,
+  .hljs-builtin-name {
+    color: #7dd3fc;
+  }
+  .hljs-title.class_,
+  .hljs-type,
+  .hljs-class {
+    color: #9fd7ff;
+  }
+  .hljs-attr,
+  .hljs-attribute,
+  .hljs-variable,
+  .hljs-template-variable,
+  .hljs-params {
+    color: #f0c79a;
+  }
+  .hljs-property {
+    color: #d6dbe6;
+  }
+  .hljs-selector-class,
+  .hljs-selector-pseudo {
+    color: #f0b48a;
+  }
+  .hljs-strong {
+    font-weight: 600;
+  }
+  .hljs-emphasis {
+    font-style: italic;
+  }
+  .hljs-link {
+    color: #7dd3fc;
+  }
+}
+
+/* Markdown typography inside AI answers and lesson reviews */
+.prose-tutor {
+  @apply text-[0.9375rem] leading-7 text-ink/90;
+}
+.prose-tutor > *:first-child {
+  margin-top: 0;
+}
+.prose-tutor > *:last-child {
+  margin-bottom: 0;
+}
+.prose-tutor p {
+  @apply my-3;
+}
+.prose-tutor ul,
+.prose-tutor ol {
+  @apply my-3 space-y-1.5 pl-5;
+}
+.prose-tutor ul {
+  list-style: disc;
+}
+.prose-tutor ol {
+  list-style: decimal;
+}
+.prose-tutor li::marker {
+  color: var(--color-accent);
+}
+.prose-tutor h1,
+.prose-tutor h2,
+.prose-tutor h3,
+.prose-tutor h4 {
+  @apply mt-5 mb-2 font-semibold text-ink;
+}
+.prose-tutor h1 {
+  font-size: 1.25rem;
+}
+.prose-tutor h2 {
+  font-size: 1.125rem;
+}
+.prose-tutor h3 {
+  font-size: 1rem;
+}
+.prose-tutor code {
+  @apply rounded-md border border-border bg-raised px-1.5 py-0.5 font-mono text-[0.85em] text-accent-hover;
+}
+.prose-tutor pre {
+  @apply overflow-hidden rounded-xl border border-border bg-code-bg;
+}
+.prose-tutor pre code {
+  @apply block overflow-x-auto border-0 bg-transparent p-4 font-mono text-[0.8125rem] leading-6 text-ink/90;
+}
+.prose-tutor a {
+  @apply text-accent-hover underline decoration-accent/40 underline-offset-2 hover:decoration-accent;
+}
+.prose-tutor table {
+  @apply my-3 w-full text-left text-sm;
+}
+.prose-tutor th {
+  @apply border-b border-border-strong px-3 py-2 font-semibold;
+}
+.prose-tutor td {
+  @apply border-b border-border px-3 py-2 align-top;
+}
+.prose-tutor blockquote {
+  @apply my-3 border-l-2 border-accent/50 pl-4 text-muted;
+}
+.prose-tutor hr {
+  @apply my-4 border-border;
+}
